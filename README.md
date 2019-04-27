@@ -3,28 +3,28 @@ Monitor your fritz.box with mrtg using docker
 
 Build:
 ````
-docker build -t fritzbox-bandwidth-monitor .
+docker build -t fritzbox-monitor .
 ````
 
 Run with "docker":
 ```
-docker run -d -p 80:80 fritzbox-bandwidth-monitor 
+docker run -d --name fritzbox-monitor -p 80:80 [-v /srv/mrtg:/var/www] fritzbox-monitor 
 ````
 
 Or using docker-compose:
 ```
-  fritzbox-bandwidth-monitor:
-    image: fritzbox-bandwidth-monitor
-    container_name: fritzbox-bandwidth-monitor
+  fritzbox-monitor:
+    image: fritzbox-monitor
+    container_name: fritzbox-monitor
+    volumes:
+       - /srv/mrtg:/var/www
     ports:
       - 80:80
     restart: unless-stopped
 ```
 
-Point your Browser to http://localhost/fritzbox.html and view your traffic stats. Cron runs every five minutes and updates the html data within the container.
+Point your Browser to http://localhost/ to view your traffic stats. MRTG runs daemonized and updates the html data within the container every five minutes.
 
 ![Example image](images/example.png)
 
-Other fritzbox related monitoring projects:
-https://github.com/Tafkas/fritzbox-munin 
-
+This project is based on https://github.com/mottobug/fritzbox-bandwidth-monitor
