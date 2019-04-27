@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Backup config on container stop
+trap 'cp /etc/mrtg.cfg /var/www && exit' 15
+
+if [ ! -d /var/www/html ]
+then
+	mkdir /var/www/html
+fi
+
+if [ -f /var/www/mrtg.cfg ]
+then
+	cp /var/www/mrtg.cfg /etc
+fi
+
+service apache2 start
+indexmaker /etc/mrtg.cfg > /var/www/html/index.html
+/usr/bin/mrtg --daemon /etc/mrtg.cfg
+cp /etc/mrtg.cfg /var/www
+
+#Keep container active
+tail -f /dev/null
