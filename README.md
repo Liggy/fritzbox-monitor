@@ -1,4 +1,4 @@
-# fritzbox-bandwidth-monitor
+# fritzbox-monitor
 Monitor your fritz.box with mrtg using docker
 
 Build:
