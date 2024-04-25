@@ -186,8 +186,8 @@ if ${PACKET_MODE:-false}; then
   b1="`ws_operation GetTotalPacketsReceived NewTotalPacketsReceived`"
   b2="`ws_operation GetTotalPacketsSent NewTotalPacketsSent`"
 else
-  b1="`ws_operation GetAddonInfos NewTotalBytesReceived`"
-  b2="`ws_operation GetAddonInfos NewTotalBytesSent`"
+  b1="`ws_operation GetAddonInfos NewX_AVM_DE_TotalBytesReceived64`"
+  b2="`ws_operation GetAddonInfos NewX_AVM_DE_TotalBytesSent64`"
 fi
 
 # output for mrtg
